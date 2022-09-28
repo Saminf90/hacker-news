@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-// import Navbar from "./components/Navbar"
+import Navbar from "./components/Navbar"
 import ListNews from "./components/ListNews"
 // import Footer from "./components/Footer"
 
@@ -19,7 +19,7 @@ function App() {
       }, networkError => console.log(networkError.message)
       ).then(data => {
         setData(data);
-        console.log("Data Arrived", data)
+        // console.log("Data Arrived", data)
         setLoading(false);
       })
       .catch((error) => {
@@ -32,17 +32,17 @@ function App() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error!</p>;
 
-  // return (
+  //  return (
   //    <div>
-  //     <p>{JSON.stringify(data)}</p>
+  //    <p>{JSON.stringify(data)}</p>
   //   </div>
-  // );
+  //  );
 
-  console.log("Data arrived after", data);
+  // console.log("Data arrived after", data);
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <ListNews data={data} />
       {/* <Footer /> */}
     </>
