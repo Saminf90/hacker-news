@@ -1,51 +1,85 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment'
 
 export default function ListNews(props) {
 
-const data = props.data.hits
-    console.log("Data arrived at ListNews", data[1].author);
-    
-    return (
-      <>
-        {data.map((item) => (
-          //   <div className="card" key={item.objectID}>
-          //     <div className="card-title">
-          //       <h3>{item.title}</h3>
-          //     </div>
-          //     <div className="card-author">
-          //       <p>{item.author}</p>
-          //     </div>
-          //     <div className="card-story">
-          //       <p>{ item.story_text ? item.story_text : item.url}</p>
-          //     </div>
-          //     <div className="card-date">
-          //       <p>{item.created_at}</p>
-          //     </div>~
-          //     <div className="card-comments">
-          //       <p>{item.comments}</p>
-          //     </div>
-          //   </div>
+  const reroutetApiData = props.data.hits;
+  const [readMoreContent, setReadMoreContent] = useState([])
 
-          <div className="card" key={item.objectID}>
-            <div className="card-content">
-              <p className="title">{item.title}</p>
-              <p className="subtitle">{item.author}</p>
-            </div>
-            <footer className="card-footer">
-              <p className="card-footer-item">
-                <span>
-                  <a href={item.story_text ? item.story_text : item.url}>
-                    Read more
-                  </a>
-                </span>
-              </p>
-              <p className="card-footer-item">
-                <span>{item.created_at}</span>
-              </p>
-            </footer>
-          </div>
-        ))}
-      </>
-      // "title, author, story, date, comments"
-    );
+  function handleReadmore(item) {
+    setReadMoreContent(item);
+    console.log(readMoreContent)
+    document.querySelector('.modal').classList.add('is-active')
   }
+
+  function handleCloseModal() {
+    document.querySelector('.modal').classList.remove('is-active')
+  }
+
+  function htmlDecode(str) {
+    const doc = new DOMParser().parseFromString(str, "text/html");
+    return doc.documentElement.innerHTML
+  }
+
+  return (
+    <>
+      <section className="section">
+        <div className="container">
+          <div className="columns is-flex-wrap-wrap">
+
+            {reroutetApiData.map((item) => (
+              <>
+                <div className="column is-4 mb-5" key={reroutetApiData.created_at_i}>
+                  <div className="card">
+                    <div className="card-content">
+                      <div className="title mb-5">
+                        <p>{item.title}</p>
+                      </div>
+                      <div className="subtitle">
+                        <p>by: {item.author}</p>
+                      </div>
+                      <div className="content">
+                        {item.story_text ? <button className="button is-success is-outlined is-rounded" onClick={() => handleReadmore(item)}>Read more</button> : ""}
+                        {item.url ? <a href={`${item.url}`}><button className="button is-link is-outlined is-rounded" >Go to external Website</button></a> : ""}
+                        {/* <button className={`button ${item.story_text ? "is-success" : "is-danger"}`} disabled={item.story_text ? false : "disabled"} onClick={() => item.story_text ? handleReadmore(item) : null}> Read more </button>
+                    <a className={`button ${item.url ? "is-success" : "is-danger"}`} disabled={item.url ? false : "disabled"} href={item.url ? item.url : ""} > Go to article </a> */}
+                      </div>
+                      <footer className="card-footer">
+                        <p className="card-footer-item is-justify-content-left">
+                          <span>{moment(item.created_at).format("MMMM Do YYYY, h:mm:ss a")}</span>
+                        </p>
+                      </footer>
+
+                    </div>
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+        </div>
+      </section >
+
+
+      <div className="modal">
+        <div className="modal-background" onClick={handleCloseModal}></div>
+        <div className="modal-card">
+          <header className="modal-card-head is-align-items-flex-start">
+            <p className="modal-card-title is-flex-wrap-wrap">{readMoreContent.title}</p>
+          </header>
+          <section className="modal-card-body">
+            {readMoreContent.story_text ?
+              <div dangerouslySetInnerHTML={{ __html: htmlDecode(readMoreContent.story_text) }} />
+              : "this has no story"}
+          </section>
+          <footer className="modal-card-foot">
+            <span>created on {moment(readMoreContent.created_at).format("MMMM Do YYYY, h:mm:ss a")}</span>
+          </footer>
+          <button className="modal-close is-large" aria-label="close" onClick={handleCloseModal}>Close</button>
+        </div>
+      </div>
+
+
+    </>
+
+  );
+}

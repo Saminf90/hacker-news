@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Navbar from "./components/Navbar"
 import ListNews from "./components/ListNews"
+
 import Footer from "./components/Footer"
+import Loading from './components/Loading'
+
 
 function App() {
   const [data, setData] = useState(null);
@@ -14,6 +17,8 @@ function App() {
 
   useEffect(() => {
     fetch(`https://hn.algolia.com/api/v1/search?query=${query}&page=${page}`)
+    setLoading(true)
+    fetch("https://hn.algolia.com/api/v1/search?query=tech")
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -32,7 +37,7 @@ function App() {
   }, [page, query]);
 
 
-  if (loading) return <p>Loading...</p>;
+
   if (error) return <p>Error!</p>;
 
   //  return (
@@ -52,6 +57,18 @@ function App() {
       <Navbar updateQuery = {updateQuery} />
       <ListNews data={data} />
       <Footer />
+      <Navbar />
+      {
+        loading ?
+          <Loading />
+
+          :
+          <div>
+            <ListNews data={data} />
+          </div>
+
+      }
+      {/* <Footer /> */}
     </>
   )
 }
