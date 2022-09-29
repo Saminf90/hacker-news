@@ -69,8 +69,7 @@ export default function ListNews(props) {
           </section>
           <footer className="modal-card-foot">
             <span>{readMoreContent.created_at}</span>
-
-            <span><button onClick={handleCloseModal}>Close</button></span>
+            <button onClick={handleCloseModal}>Close</button>
           </footer>
         </div>
       </div>
