@@ -3,6 +3,8 @@ import './App.css'
 import Navbar from "./components/Navbar"
 import ListNews from "./components/ListNews"
 // import Footer from "./components/Footer"
+import Loading from './components/Loading'
+
 
 function App() {
   const [data, setData] = useState(null);
@@ -10,6 +12,7 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setLoading(true)
     fetch("https://hn.algolia.com/api/v1/search?query=tech")
       .then(response => {
         if (response.ok) {
@@ -29,7 +32,7 @@ function App() {
   }, []);
 
 
-  if (loading) return <p>Loading...</p>;
+
   if (error) return <p>Error!</p>;
 
   //  return (
@@ -43,7 +46,16 @@ function App() {
   return (
     <>
       <Navbar />
-      <ListNews data={data} />
+      {
+        loading ?
+          <Loading />
+
+          :
+          <div>
+            <ListNews data={data} />
+          </div>
+
+      }
       {/* <Footer /> */}
     </>
   )
