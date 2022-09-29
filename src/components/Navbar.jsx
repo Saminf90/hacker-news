@@ -8,8 +8,8 @@ export default function Navbar() {
           <a className="navbar-item" href="#">
             <img
               src="https://news.ycombinator.com/y18.gif"
-              width="40"
-              height="40"
+              width="30"
+              height="30"
             />
           </a>
 
