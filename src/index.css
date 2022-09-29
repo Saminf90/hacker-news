@@ -37,6 +37,24 @@
 .navbar-item, .navbar-link {
   color: #ffffff;
 }
+.footer {
+  background-color: #f6911ed3;
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.footer li {
+  font-size: 16px;
+  margin: 0 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.footer li:first-child {
+  list-style-type: none;
+}
+
 
 h1 {
   font-size: 3.2em;

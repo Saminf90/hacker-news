@@ -1,6 +1,15 @@
 import React from "react";
 
-export default function Navbar() {
+
+
+export default function Navbar(props) {
+  
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    props.updateQuery(event.target.elements[0].value)
+  }
+
+
   return (
     <>
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -49,11 +58,9 @@ export default function Navbar() {
             <div className="navbar-item">
               <div className="field has-addons">
                 <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Find a repository"
-                  />
+                <form onSubmit={handleSubmit}>
+                  <input className="input" type="text" id="search" placeholder="Search for a topic" />
+                </form>
                 </div>
                 <div className="control">
                   <a className="button is-info">Search</a>
