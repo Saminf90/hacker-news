@@ -1,36 +1,26 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0.5rem;
   box-sizing: border-box;
 /* // text-align: center; */
+/* background-color: #6f6f6f9e; */
+background-color: #1d296e21;
 }
 
-
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar {
+  border-radius: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-/* .card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */
-
-.columns {
+.modal-card-head {
   flex-wrap: wrap;
 }
+
+.modal-card-foot {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* div.card-content {
+  background-color: #7bfc762c;
+} */

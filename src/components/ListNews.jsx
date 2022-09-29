@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment'
 
 export default function ListNews(props) {
 
@@ -24,18 +25,18 @@ export default function ListNews(props) {
     <>
       <section className="section">
         <div className="container">
-          <div className="columns">
+          <div className="columns is-flex-wrap-wrap">
 
             {reroutetApiData.map((item) => (
               <>
-                <div className="column is-4">
-                  <div className="card" key={item.objectID}>
+                <div className="column is-4 mb-5" key={reroutetApiData.created_at_i}>
+                  <div className="card">
                     <div className="card-content">
-                      <div className="title">
+                      <div className="title mb-5">
                         <p>{item.title}</p>
                       </div>
                       <div className="subtitle">
-                        <p>{item.author}</p>
+                        <p>by: {item.author}</p>
                       </div>
                       <div className="content">
                         {item.story_text ? <button className="button is-success is-outlined is-rounded" onClick={() => handleReadmore(item)}>Read more</button> : ""}
@@ -44,8 +45,8 @@ export default function ListNews(props) {
                     <a className={`button ${item.url ? "is-success" : "is-danger"}`} disabled={item.url ? false : "disabled"} href={item.url ? item.url : ""} > Go to article </a> */}
                       </div>
                       <footer className="card-footer">
-                        <p className="card-footer-item">
-                          <span>{item.created_at}</span>
+                        <p className="card-footer-item is-justify-content-left">
+                          <span>{moment(item.created_at).format("MMMM Do YYYY, h:mm:ss a")}</span>
                         </p>
                       </footer>
 
@@ -60,10 +61,10 @@ export default function ListNews(props) {
 
 
       <div className="modal">
-        <div className="modal-background"></div>
+        <div className="modal-background" onClick={handleCloseModal}></div>
         <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">{readMoreContent.title}</p>
+          <header className="modal-card-head is-align-items-flex-start">
+            <p className="modal-card-title is-flex-wrap-wrap">{readMoreContent.title}</p>
           </header>
           <section className="modal-card-body">
             {readMoreContent.story_text ?
@@ -71,9 +72,9 @@ export default function ListNews(props) {
               : "this has no story"}
           </section>
           <footer className="modal-card-foot">
-            <span>{readMoreContent.created_at}</span>
-            <button onClick={handleCloseModal}>Close</button>
+            <span>created on {moment(readMoreContent.created_at).format("MMMM Do YYYY, h:mm:ss a")}</span>
           </footer>
+          <button className="modal-close is-large" aria-label="close" onClick={handleCloseModal}>Close</button>
         </div>
       </div>
 

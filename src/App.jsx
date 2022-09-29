@@ -10,7 +10,7 @@ function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   useEffect(() => {
     setLoading(true)
     fetch("https://hn.algolia.com/api/v1/search?query=tech")
@@ -32,7 +32,7 @@ function App() {
   }, []);
 
 
- 
+
   if (error) return <p>Error!</p>;
 
   //  return (
@@ -47,14 +47,14 @@ function App() {
     <>
       <Navbar />
       {
-      loading ? 
-      <Loading/>
-      
-      :
-      <div>
-        <ListNews data={data} />    
-      </div>
-      
+        loading ?
+          <Loading />
+
+          :
+          <div>
+            <ListNews data={data} />
+          </div>
+
       }
       {/* <Footer /> */}
     </>
