@@ -28,7 +28,7 @@ export default function ListNews(props) {
 
             {reroutetApiData.map((item) => (
               <>
-                <div className="column is-3">
+                <div className="column is-4">
                   <div className="card" key={item.objectID}>
                     <div className="card-content">
                       <div className="title">
