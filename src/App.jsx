@@ -34,7 +34,7 @@ function App() {
         setError(error);
         setLoading(false);
       });
-  }, [page, query]);
+  }, [page, query, hitsPerPage]);
 
 
 
@@ -56,6 +56,7 @@ function App() {
     <>
       <Navbar updateQuery = {updateQuery} />
       <ListNews data={data} />
+      <Pagination page={page} setPage={setPage} rangeLength={20} /> 
       <Footer />
       <Navbar />
       {

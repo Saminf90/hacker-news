@@ -5,6 +5,7 @@
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
+  position: relative;
 
 
   /* font-synthesis: none;
@@ -37,6 +38,7 @@
 .navbar-item, .navbar-link {
   color: #ffffff;
 }
+
 .footer {
   background-color: #f6911ed3;
   padding: 3rem 1.5rem;
@@ -61,19 +63,26 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+.pagination-button {
+  display: inline-block;
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color:#f6911ed3;
+  color: #fff;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 10px;
+  
+
+
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #ef6b3b;
+  background-color: #ef6b3b;
 }
 button:focus,
 button:focus-visible {
