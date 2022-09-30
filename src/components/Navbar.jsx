@@ -3,7 +3,7 @@ import React from "react";
 
 
 export default function Navbar(props) {
-  
+
   const handleSubmit = (event) => {
     event.preventDefault()
     props.updateQuery(event.target.elements[0].value)
@@ -58,9 +58,9 @@ export default function Navbar(props) {
             <div className="navbar-item">
               <div className="field has-addons">
                 <div className="control">
-                <form onSubmit={handleSubmit}>
-                  <input className="input" type="text" id="search" placeholder="Search for a topic" />
-                </form>
+                  <form onSubmit={handleSubmit}>
+                    <input className="input" type="text" id="search" placeholder="Search for a topic" />
+                  </form>
                 </div>
                 <div className="control">
                   <a className="button is-info">Search</a>
