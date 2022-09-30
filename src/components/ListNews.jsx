@@ -23,36 +23,38 @@ export default function ListNews(props) {
 
   return (
     <>
-      <section className="section">
+      <section className="section is-fullheight">
         <div className="container">
           <div className="columns is-flex-wrap-wrap">
+            {
+              reroutetApiData.map((item) => (item.title || item.url ?
+                <>
+                  <div className="column is-4 mb-5" key={reroutetApiData.created_at_i}>
+                    <div className="card">
+                      <div className="card-content">
+                        <div className="title mb-5">
+                          <p>{item.title}</p>
+                        </div>
+                        <div className="subtitle">
+                          <p>by: {item.author}</p>
+                        </div>
+                        <div className="content">
+                          {item.story_text ? <button className="button is-success is-outlined is-rounded" onClick={() => handleReadmore(item)}>Read more</button> : ""}
+                          {item.url ? <a href={`${item.url}`}><button className="button is-link is-outlined is-rounded" >Go to external Website</button></a> : ""}
+                        </div>
+                        <footer className="card-footer">
+                          <p className="card-footer-item is-justify-content-left">
+                            <span>{moment(item.created_at).format("MMMM Do YYYY, h:mm:ss a")}</span>
+                          </p>
+                        </footer>
 
-            {reroutetApiData.map((item) => (
-              <>
-                <div className="column is-4 mb-5" key={reroutetApiData.created_at_i}>
-                  <div className="card">
-                    <div className="card-content">
-                      <div className="title mb-5">
-                        <p>{item.title}</p>
                       </div>
-                      <div className="subtitle">
-                        <p>by: {item.author}</p>
-                      </div>
-                      <div className="content">
-                        {item.story_text ? <button className="button is-success is-outlined is-rounded" onClick={() => handleReadmore(item)}>Read more</button> : ""}
-                        {item.url ? <a href={`${item.url}`}><button className="button is-link is-outlined is-rounded" >Go to external Website</button></a> : ""}
-                      </div>
-                      <footer className="card-footer">
-                        <p className="card-footer-item is-justify-content-left">
-                          <span>{moment(item.created_at).format("MMMM Do YYYY, h:mm:ss a")}</span>
-                        </p>
-                      </footer>
-
                     </div>
                   </div>
-                </div>
-              </>
-            ))}
+                </>
+                : null))
+            }
+
           </div>
         </div>
       </section >
