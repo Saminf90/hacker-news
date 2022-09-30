@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 
 
 export default function Navbar(props) {
+  const [search, setSearch] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
     props.updateQuery(event.target.elements[0].value)
   }
 
+  const handleClick = (event) => {
+    event.preventDefault()
+    props.updateQuery(search)
+  }
 
+  const handleChange = (event) => { 
+    setSearch(event.target.value)
+  }
+  
   return (
     <>
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -59,11 +68,14 @@ export default function Navbar(props) {
               <div className="field has-addons">
                 <div className="control">
                   <form onSubmit={handleSubmit}>
-                    <input className="input" type="text" id="search" placeholder="Search for a topic" />
+                    <input
+                    value={search} 
+                    onChange={handleChange} 
+                    className="input" type="text" id="search" placeholder="Search for a topic" />
                   </form>
                 </div>
                 <div className="control">
-                  <a className="button is-info">Search</a>
+                  <a onClick={handleClick} className="button is-info">Search</a>
                 </div>
               </div>
             </div>
