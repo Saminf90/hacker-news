@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Navbar from "./components/Navbar"
 import ListNews from "./components/ListNews"
-
 import Footer from "./components/Footer"
 import Loading from './components/Loading'
+import Pagination from './components/Pagination'
 
 
 function App() {
@@ -16,9 +16,8 @@ function App() {
   const [hitsPerPage, setHitsPerPage] = useState(10);
 
   useEffect(() => {
-    fetch(`https://hn.algolia.com/api/v1/search?query=${query}&page=${page}`)
     setLoading(true)
-    fetch("https://hn.algolia.com/api/v1/search?query=tech")
+      fetch(`https://hn.algolia.com/api/v1/search?query=${query}&page=${page}`)
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -27,7 +26,6 @@ function App() {
       }, networkError => console.log(networkError.message)
       ).then(data => {
         setData(data);
-        // console.log("Data Arrived", data)
         setLoading(false);
       })
       .catch((error) => {
@@ -35,18 +33,9 @@ function App() {
         setLoading(false);
       });
   }, [page, query, hitsPerPage]);
+    
+    if (error) return <p>Error!</p>;
 
-
-
-  if (error) return <p>Error!</p>;
-
-  //  return (
-  //    <div>
-  //    <p>{JSON.stringify(data)}</p>
-  //   </div>
-  //  );
-
-  // console.log("Data arrived after", data);
   const updateQuery = (newQuery) => {
     setPage(0)
     setQuery (newQuery)
@@ -55,10 +44,6 @@ function App() {
   return (
     <>
       <Navbar updateQuery = {updateQuery} />
-      <ListNews data={data} />
-      <Pagination page={page} setPage={setPage} rangeLength={20} /> 
-      <Footer />
-      <Navbar />
       {
         loading ?
           <Loading />
@@ -69,7 +54,10 @@ function App() {
           </div>
 
       }
-      {/* <Footer /> */}
+      <div className='page-bar'>
+      <Pagination page={page} setPage={setPage} rangeLength={20} /> 
+      </div>
+      <Footer />
     </>
   )
 }

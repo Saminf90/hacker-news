@@ -12,6 +12,7 @@
     "bulma": "^0.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-moment": "^1.1.2",
     "react-spinners": "^0.13.4"
   },
   "devDependencies": {

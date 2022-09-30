@@ -9,8 +9,7 @@ export default function Pagination({ page, setPage, rangeLength }) {
   }
   return pages.map((pn) => 
     <>
-        <button className="pagination-button" onClick={() => setPage(pn)}>{pn}</button>
-            
+        <button className="pagination-button" onClick={() => setPage(pn)}>{pn + 1}</button>
     </>
     );
 }

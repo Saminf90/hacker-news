@@ -41,8 +41,6 @@ export default function ListNews(props) {
                       <div className="content">
                         {item.story_text ? <button className="button is-success is-outlined is-rounded" onClick={() => handleReadmore(item)}>Read more</button> : ""}
                         {item.url ? <a href={`${item.url}`}><button className="button is-link is-outlined is-rounded" >Go to external Website</button></a> : ""}
-                        {/* <button className={`button ${item.story_text ? "is-success" : "is-danger"}`} disabled={item.story_text ? false : "disabled"} onClick={() => item.story_text ? handleReadmore(item) : null}> Read more </button>
-                    <a className={`button ${item.url ? "is-success" : "is-danger"}`} disabled={item.url ? false : "disabled"} href={item.url ? item.url : ""} > Go to article </a> */}
                       </div>
                       <footer className="card-footer">
                         <p className="card-footer-item is-justify-content-left">
